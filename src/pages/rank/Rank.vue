@@ -20,13 +20,18 @@ export default {
   },
   methods:{
   	getRankInfo (){
-  		axios.get('/api/index.json').then(this.getRankInfoSucc)
+  		axios.get('/api/getRankList',{
+        }).then((res) => {
+        return Promise.resolve(res.data)
+      }).then(this.getRankInfoSucc)
+      
   	},
-  	getRankInfoSucc (res){
-  		res=res.data
-  		if(res.ret&&res.datalist){
-  			this.rankList=res.datalist.rankList
-  		}
+  	getRankInfoSucc (res){    
+  		if (res.code === 0) { 
+
+       this.rankList = res.req_0.data.group          
+        
+      }
 
   	}
   }

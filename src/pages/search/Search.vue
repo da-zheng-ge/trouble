@@ -5,13 +5,18 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 import SearchInput from './components/Input'
 export default {
   name: 'Search',
   components:{
   SearchInput
-  }
+  },
+
+   methods: {
+ 
+
+}
   
 }
 </script>

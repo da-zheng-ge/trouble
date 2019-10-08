@@ -1,23 +1,27 @@
 <template>
   <div class="borad" ref="wrapper">
     <div>
-      <div class="borad-wrapper" v-for="item in list" :key="item.id">
-        <div class="img-wrapper">
-          <div><img class="img" :src="item.imgUrl"/></div>
-          <span class="iconfont icon">&#xe602;1980.0万</span>
-        </div>
-        <div class="info-wrapper">
-          <h3 class="info-title">{{item.title}}</h3>
-          <p class="info-content" v-for="one in item.parray" :key="one.id">
-             {{one.id }}
-            <span class="song">{{one.song}}</span >
-            {{one.author}}
-          </p>
-          <span class="iconfont arrow">&#xe60e;</span>
-        </div>
+      <div v-for="item in list" :key="item.groupId">
+        <div class="borad-wrapper" v-for="top in item.toplist" :key="top.topId">
+          <div class="img-wrapper">
+            <div><img class="img" :src="top.frontPicUrl"/></div>
+            <span class="iconfont icon">&#xe602;{{top.listenNum}}</span>
+          </div>
+          <div class="info-wrapper">
+            <h3 class="info-title">{{top.title}}</h3>
+            <div class="p-content">
+              <p class="info-content" v-for="(one,index) in top.song" :key="index">
+                 {{one.rank }}
+                <span class="song">{{one.title}}</span >
+                - {{one.singerName}}
+              </p>
+            </div>
+            <span class="iconfont arrow">&#xe60e;</span>
+          </div>
+        </div> 
       </div>
-    </div>
-  </div>
+    </div>   
+</div>
 </template>
 
 <script>
@@ -25,8 +29,9 @@ import Bscroll from 'better-scroll'
 export default {
   name: 'RankBorad',
   props:{list:Array},
-  mounted (){
+  activated (){
     let scroll=new Bscroll(this.$refs.wrapper)
+    
   }
 }
 </script>
@@ -47,10 +52,9 @@ export default {
     margin-bottom:.2rem
     position:relative
     background:#fff
-    overflow:hidden
-    // display:flex
-    .img-wrapper
-      float:left
+    height:2rem
+    display:flex
+    .img-wrapper      
       height:2rem
       width:2rem
       position:relative
@@ -65,23 +69,22 @@ export default {
         left:.1rem
         bottom:.1rem
     .info-wrapper
-      flex:1
+       flex:1
+       min-width:0
       .info-title
         font-size:.32rem
+        ellipsis()
         margin:.1rem
-        padding-left:.1rem
-        ellipsis()
-      .info-content
+      .p-content
         padding:.1rem
-        padding-left:.2rem
-        font-size:.28rem
-        color:rgba(0,0,0,.5)
-        ellipsis()
-        .song
-          color:black
-          ellipsis()
-          display:inline-block
-          margin:0 .1rem
+        .info-content
+          font-size:.28rem
+          color:rgba(0,0,0,.5) 
+          ellipsis() 
+          margin:.1rem                   
+          .song
+            color:black
+            margin:0 .1rem
       .arrow
         position:absolute
         right:0

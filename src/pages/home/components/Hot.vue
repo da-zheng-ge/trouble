@@ -4,9 +4,9 @@
  	<div class="hot-wrapper">		
 	 	<div class="list" v-for="item in list" :key="item.id">
 	 		<div class="list-wrapper">	
-		 		<div><img class="list-img" :src="item.imgUrl"/></div>
-		 		<p class="list-info">{{item.song}}</p>
-		 		<p class="list-author">{{item.author}}</p>	
+		 		<div><img class="list-img" :src="item.picUrl"/></div>
+		 		<p class="list-info">{{item.songListDesc}}</p>
+		 		<p class="list-author">{{item.songListAuthor}}</p>	
 	 		</div>
 	 	</div>	
  	</div>

@@ -10,6 +10,23 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
+
+
+
+
+
+
+
+const express = require('express')
+const axios = require('axios')
+const app = express()
+let apiRoutes = express.Router()
+app.use('/api', apiRoutes)
+
+
+
+
+
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
@@ -42,6 +59,41 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
+    },
+    before(app) {
+      app.get('/api/getHomeList', function (req, res) {
+        let url = 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
+        axios.get(url, {
+          headers: {
+            referer: 'https://y.qq.com/m/index.html',
+            host: 'y.qq.com'
+          },
+         
+          params: req.query
+        }).then((response) => {
+         
+          res.json(response.data)
+        }).catch((e) => {
+          console.log(e)
+        })
+      })
+
+    app.get('/api/getRankList', function (req, res) {
+     console.log("主页 POST 请求");
+     let url = 'https://u.y.qq.com/cgi-bin/musicu.fcg?_=1570420806789'
+     let data = {"req_0":{"module":"musicToplist.ToplistInfoServer","method":"GetAll","param":{}},
+                "comm":{"g_tk":5381,"uin":0,"format":"json","ct":23,"cv":0}}
+      axios.post(url,
+                data
+                )                            
+.then((response) => {           
+          res.json(response.data)
+        }).catch((e) => {
+          console.log(e)
+        })
+})
+
+
     }
   },
   plugins: [

@@ -1,7 +1,7 @@
 <template>
   <div>
     <swiper :list="swiperList"></swiper>
-    <home-radio></home-radio>
+    <home-radio :list="radioList"></home-radio>
     <home-hot :list="hotList"></home-hot>
     <home-footer></home-footer>
   </div>
@@ -24,7 +24,8 @@ export default {
   data (){
     return {
       swiperList:[],
-      hotList:[]
+      hotList:[],
+      radioList:[]
     }
   },
  
@@ -33,15 +34,29 @@ export default {
   },
   methods:{
     getHomeInfo (){
-      axios.get('/api/index.json')
-      .then(this.getHomeInfoSucc)
+      const url = '/api/getHomeList'
+
+      axios.get(url, {
+        params: {_: 1570241043057,
+        g_tk: 5381,
+        uin: 0,
+        format: 'json',
+        inCharset: 'utf-8',
+        outCharset: 'utf-8',
+        notice: 0,
+        platform: 'h5',
+        needNewCode: 1}
+      }).then((res) => {
+        return Promise.resolve(res.data)
+      })
+        .then(this.getHomeInfoSucc)
     },
-    getHomeInfoSucc (res){
-      res=res.data
-      if(res.ret&&res.datalist)
-       { 
-        this.swiperList=res.datalist.swiperList
-        this.hotList=res.datalist.hotList
+    getHomeInfoSucc (res){    
+      if (res.code === 0) { 
+        const dataList = res.data          
+        this.swiperList=dataList.slider
+        this.radioList=dataList.radioList
+        this.hotList=dataList.songList
       }
 
     }  

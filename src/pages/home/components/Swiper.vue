@@ -2,7 +2,7 @@
   <div class="wrapper">
     <swiper :options="swiperOption" v-if="list.length">
       <swiper-slide v-for="item in list" :key="item.id" v-if="list.length">
-        <img class="swiper-img" :src="item.imgUrl"/>
+        <img class="swiper-img" :src="item.picUrl"/>
       </swiper-slide>    
       <div class="swiper-pagination"  slot="pagination"></div>
     </swiper>
