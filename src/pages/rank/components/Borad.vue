@@ -2,10 +2,10 @@
   <div class="borad" ref="wrapper">
     <div>
       <div v-for="item in list" :key="item.groupId">
-        <div class="borad-wrapper" v-for="top in item.toplist" :key="top.topId">
+        <router-link :to="'/RankDetail/' + top.topId" tag="div" class="borad-wrapper" v-for="top in item.toplist" :key="top.topId">
           <div class="img-wrapper">
             <div><img class="img" :src="top.frontPicUrl"/></div>
-            <span class="iconfont icon">&#xe602;{{top.listenNum}}</span>
+            <span class="iconfont icon">&#xe602;{{(top.listenNum/10000).toFixed(1)+'万'}}</span>
           </div>
           <div class="info-wrapper">
             <h3 class="info-title">{{top.title}}</h3>
@@ -18,7 +18,7 @@
             </div>
             <span class="iconfont arrow">&#xe60e;</span>
           </div>
-        </div> 
+        </router-link>
       </div>
     </div>   
 </div>
@@ -30,8 +30,9 @@ export default {
   name: 'RankBorad',
   props:{list:Array},
   activated (){
-    let scroll=new Bscroll(this.$refs.wrapper)
-    
+    this.$nextTick(() => {
+      let scroll=new Bscroll(this.$refs.wrapper)
+    })
   }
 }
 </script>

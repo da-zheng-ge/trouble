@@ -1,6 +1,6 @@
 <template>
   <div>
-	<search-input></search-input>
+	<search-input :list="searchList"></search-input>
   </div>
 </template>
 
@@ -12,11 +12,25 @@ export default {
   components:{
   SearchInput
   },
-
-   methods: {
- 
-
-}
+  data (){
+  	return{
+  		searchList:{}
+  	}
+  },
+   mounted (){
+   	this.getsearchList()
+   },
+   methods:{
+   	getsearchList(){
+   		axios.get('/api/searchList').then((res) => {
+        return Promise.resolve(res.data)
+      }).then(this.getsearchListSucc)
+   	},
+   	getsearchListSucc(res){
+   		if(res.code===0)
+   		this.searchList=res.data
+   	}
+   }
   
 }
 </script>

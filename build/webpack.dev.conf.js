@@ -79,7 +79,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       })
 
     app.get('/api/getRankList', function (req, res) {
-     console.log("主页 POST 请求");
      let url = 'https://u.y.qq.com/cgi-bin/musicu.fcg?_=1570420806789'
      let data = {"req_0":{"module":"musicToplist.ToplistInfoServer","method":"GetAll","param":{}},
                 "comm":{"g_tk":5381,"uin":0,"format":"json","ct":23,"cv":0}}
@@ -93,6 +92,29 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         })
 })
 
+
+    app.get('/api/searchList', function (req, res) {
+        let url = 'https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg'
+        axios.get(url, {                
+          params: req.query
+        }).then((response) => {
+          res.json(response.data)
+        }).catch((e) => {
+          console.log(e)
+        })
+      })
+
+    app.get('/api/detailList', function (req, res) {
+      console.log("请求收到")
+        let url = 'https://i.y.qq.com/n2/m/share/details/toplist.html'
+        axios.get(url, {                
+          params: req.query
+        }).then((response) => {
+          res.json(response.data)
+        }).catch((e) => {
+          console.log(e)
+        })
+      })
 
     }
   },

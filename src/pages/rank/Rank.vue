@@ -20,8 +20,7 @@ export default {
   },
   methods:{
   	getRankInfo (){
-  		axios.get('/api/getRankList',{
-        }).then((res) => {
+  		axios.get('/api/getRankList').then((res) => {
         return Promise.resolve(res.data)
       }).then(this.getRankInfoSucc)
       

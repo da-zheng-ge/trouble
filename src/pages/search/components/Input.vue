@@ -9,8 +9,9 @@
 	  <h3 class="hot">热门搜索</h3>
 	  <div @click="change">在哪里</div>
 	  <div class="recommend">
-	  	<div class="recommend-list" v-for="(item,index) in list" :key="index" :class="{active:index==0}">
-	  		{{item.content}}
+	  	<div><a :href="list.special_url" class="recommend-list active">{{list.special_key}}</a></div>
+	  	<div class="recommend-list" v-for="(item,index) in list.hotkey" :key="index" v-if="index<=5">
+	  		{{item.k}}
 	  	</div>	  	
 	  </div>
   	</div>
@@ -21,11 +22,7 @@
 
 export default {
   name: 'SearchInput',
-  data (){
-  	return {
-  		list:[{content:"乐队的夏天"},{content:"乐队的夏hy天"},{content:"乐队的夏hy天"},{content:"乐队的夏hy天"},{content:"乐队的夏hy天"},{content:"乐队的夏hy天"},{content:"乐队的夏hy天"},{content:"乐队的夏hy天"},{content:"乐队的夏hy天"},{content:"乐队的夏hy天"}]
-  	}
-  },
+  props:{list:Object},
   methods:{
   	change (test){
   		this.$store.commit("changeTest","随便")
@@ -37,7 +34,7 @@ export default {
 
 
 <style lang="stylus" scoped>
-.active{color:red;border:red solid .02rem!important}
+.active{color:red;float:left;border:red solid .02rem!important}
 .input-wrapper
 	height:1.2rem
 	background:#f4f4f4
@@ -65,6 +62,8 @@ export default {
 .hot
 	margin:.2rem
 .recommend
+	height:2.5rem
+	overflow:hidden
 	.recommend-list
 		border:rgba(0,0,0,.6) solid .02rem
 		float:left

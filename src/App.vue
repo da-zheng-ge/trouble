@@ -3,7 +3,7 @@
 	<home-header></home-header>
 	<home-nav></home-nav>
   	<div id="app">
-      <keep-alive>
+      <keep-alive exclude="RankDetail">
     	<router-view/>
     </keep-alive>
   	</div>
