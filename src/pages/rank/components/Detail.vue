@@ -20,7 +20,7 @@
     </div>
     <h3 class="rank">排行榜  共{{songTitle.totalNum}}首</h3>
     <ul class="song">
-      <router-link to="/RankSong" tag="li"  class="song-item border-bottom" v-for="item in songList" :key="item.rank">
+      <router-link :to="'/RankSong/'+item.songId" tag="li"  class="song-item border-bottom" v-for="item in songList" :key="item.rank">
         <div class="song-index">
           <span class="index-num" :class="{active:item.rank==1||item.rank==2||item.rank==3}">{{item.rank}}</span>
           <span class="hot-wrap">
@@ -73,25 +73,28 @@ export default {
   },
   methods:{
     getdetailList(){   
+      let Id=this.$route.params.id
       let parm={
         ADTAG: 'myqq',
         from: 'myqq',
         channel: 10007100,
-        id: this.$route.params.id
+        id: Id
 
       }
-      axios.get('/api/detailList',{params:parm}).then(this.getdetailListSucc)
+      axios.get('/i-pro/n2/m/share/details/toplist.html',{params:parm}).then(this.getdetailListSucc)
     },
     getdetailListSucc(res){
-      this.$nextTick(() => {
-     if(res.statusText=="OK"){
+      
+        if(res.statusText=="OK"){
         let data=res.data.match(/firstPageData\s\=\s({.*})/)[1]   
 
         data=JSON.parse(data)
         this.songTitle=data.toplistData
         this.songList=data.toplistData.song
       }
-    })
+   
+     
+   
         
     }
   }

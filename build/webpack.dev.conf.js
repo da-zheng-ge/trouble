@@ -61,60 +61,59 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       poll: config.dev.poll,
     },
     before(app) {
-      app.get('/api/getHomeList', function (req, res) {
-        let url = 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
-        axios.get(url, {
-          headers: {
-            referer: 'https://y.qq.com/m/index.html',
-            host: 'y.qq.com'
-          },
+      // app.get('/api/getHomeList', function (req, res) {
+      //   let url = 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
+      //   axios.get(url, {
+      //     headers: {
+      //       referer: 'https://y.qq.com/m/index.html',
+      //       host: 'y.qq.com'
+      //     },
          
-          params: req.query
-        }).then((response) => {
+      //     params: req.query
+      //   }).then((response) => {
          
-          res.json(response.data)
-        }).catch((e) => {
-          console.log(e)
-        })
-      })
+      //     res.json(response.data)
+      //   }).catch((e) => {
+      //     console.log(e)
+      //   })
+      // })
 
-    app.get('/api/getRankList', function (req, res) {
-     let url = 'https://u.y.qq.com/cgi-bin/musicu.fcg?_=1570420806789'
-     let data = {"req_0":{"module":"musicToplist.ToplistInfoServer","method":"GetAll","param":{}},
-                "comm":{"g_tk":5381,"uin":0,"format":"json","ct":23,"cv":0}}
-      axios.post(url,
-                data
-                )                            
-.then((response) => {           
-          res.json(response.data)
-        }).catch((e) => {
-          console.log(e)
-        })
-})
+//     app.get('/api/getRankList', function (req, res) {
+//      let url = 'https://u.y.qq.com/cgi-bin/musicu.fcg?_=1570420806789'
+//      let data = {"req_0":{"module":"musicToplist.ToplistInfoServer","method":"GetAll","param":{}},
+//                 "comm":{"g_tk":5381,"uin":0,"format":"json","ct":23,"cv":0}}
+//       axios.post(url,
+//                 data
+//                 )                            
+// .then((response) => {           
+//           res.json(response.data)
+//         }).catch((e) => {
+//           console.log(e)
+//         })
+// })
 
 
-    app.get('/api/searchList', function (req, res) {
-        let url = 'https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg'
-        axios.get(url, {                
-          params: req.query
-        }).then((response) => {
-          res.json(response.data)
-        }).catch((e) => {
-          console.log(e)
-        })
-      })
+    // app.get('/api/searchList', function (req, res) {
+    //     let url = 'https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg'
+    //     axios.get(url, {                
+    //       params: req.query
+    //     }).then((response) => {
+    //       res.json(response.data)
+    //     }).catch((e) => {
+    //       console.log(e)
+    //     })
+    //   })
 
-    app.get('/api/detailList', function (req, res) {
-      console.log("请求收到")
-        let url = 'https://i.y.qq.com/n2/m/share/details/toplist.html'
-        axios.get(url, {                
-          params: req.query
-        }).then((response) => {
-          res.json(response.data)
-        }).catch((e) => {
-          console.log(e)
-        })
-      })
+    // app.get('/api/detailList', function (req, res) {
+    //     let url = 'https://i.y.qq.com/n2/m/share/details/toplist.html'
+    //     axios.get(url, {                
+    //       params: req.query
+    //     }).then((response) => {
+    //       res.json(response.data)
+    //     }).catch((e) => {
+    //       console.log(e)
+    //     })
+    //   })
 
     }
   },

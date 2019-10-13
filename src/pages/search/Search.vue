@@ -22,7 +22,7 @@ export default {
    },
    methods:{
    	getsearchList(){
-   		axios.get('/api/searchList').then((res) => {
+   		axios.get('/c-pro/splcloud/fcgi-bin/gethotkey.fcg').then((res) => {
         return Promise.resolve(res.data)
       }).then(this.getsearchListSucc)
    	},

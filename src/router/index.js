@@ -28,7 +28,7 @@ export default new Router({
       component: RankDetail
     },
     {
-      path: '/RankSong',
+      path: '/RankSong/:songId',
       name: 'RankSong',
       component: RankSong
     }

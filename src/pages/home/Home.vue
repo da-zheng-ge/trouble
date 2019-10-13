@@ -34,7 +34,7 @@ export default {
   },
   methods:{
     getHomeInfo (){
-      const url = '/api/getHomeList'
+      const url = '/c-pro/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
 
       axios.get(url, {
         params: {_: 1570241043057,

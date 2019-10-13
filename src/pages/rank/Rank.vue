@@ -20,7 +20,12 @@ export default {
   },
   methods:{
   	getRankInfo (){
-  		axios.get('/api/getRankList').then((res) => {
+      let data = {"req_0":{"module":"musicToplist.ToplistInfoServer","method":"GetAll","param":{}},
+                "comm":{"g_tk":5381,"uin":0,"format":"json","ct":23,"cv":0}}      
+  		axios.post('/u-pro/cgi-bin/musicu.fcg',data,{
+        
+        params:{_: new Date().getTime()}
+      }).then((res) => {
         return Promise.resolve(res.data)
       }).then(this.getRankInfoSucc)
       

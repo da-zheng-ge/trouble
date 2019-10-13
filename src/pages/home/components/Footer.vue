@@ -3,7 +3,6 @@
     <div class="logo">
       <img class="logo-img" src="http://y.gtimg.cn/mediastyle/mod/mobile/img/logo_ch.svg?max_age=2592000"/>
     </div>
-    <p class="copyRight">{{test}}</p>
     <p class="copyRight">Copyright © 1998 - 2019 Tencent. All Rights Reserved.</p>
     <p class="copyRight">联系电话：0755-86013388 QQ群：55209235</p>
   </div>

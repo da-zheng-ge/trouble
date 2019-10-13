@@ -16,7 +16,33 @@ module.exports = {
             pathRewrite:{
                 '^/api':'/static/mock'
             }
+        },
+        '/c-pro': {
+            target: 'https://c.y.qq.com', // 接口的域名
+            changeOrigin: true,
+            bypass: function (req, res, proxyOptions) {
+              req.headers.referer = 'https://c.y.qq.com/';
+              req.headers.host = 'c.y.qq.com';
+          },
+            pathRewrite: {
+              '^/c-pro': ''
+            }
+        },
+        '/u-pro': {
+            target: 'https://u.y.qq.com', // 接口的域名
+            changeOrigin: true,
+            pathRewrite: {
+              '^/u-pro': ''
+            }
+        },
+        '/i-pro': {
+            target: 'https://i.y.qq.com', // 接口的域名
+            changeOrigin: true,
+            pathRewrite: {
+              '^/i-pro': ''
+            }
         }
+
     },
 
     // Various Dev Server settings
